@@ -70,7 +70,7 @@ public class Connected {
 		lblconnected.setBounds(184, 56, 261, 22);
 		frame.getContentPane().add(lblconnected);
 		AdminAccount account = new AdminAccount();
-		account.Database(login, null, null, frame);
+		account.DatabaseConnexion(login, null, null, frame);
 		lblconnected.setText("Bonjour," + account.name + " " + account.surname);
 
 		JLabel lblsalary = new JLabel("Votre salaire est de " + account.salary);

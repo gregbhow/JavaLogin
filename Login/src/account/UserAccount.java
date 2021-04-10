@@ -42,14 +42,13 @@ public class UserAccount {
 	public void setAccountType(String accountType) {
 		this.accountType = accountType;
 	}
-	 
 
 	public boolean verification() {
 		boolean error = false;
 		Pattern pattern = Pattern.compile(PASSWORD_PATTERN);
 		Matcher matcher;
 		matcher = pattern.matcher(password);
-		
+
 		if (Pattern.matches("[a-z]*", name.substring(1, name.length())) == false
 				|| Pattern.matches("[A-Z]", name.substring(0, 1)) == false || name.equalsIgnoreCase("")) {
 			JFrame frame = new JFrame("error");
@@ -91,6 +90,49 @@ public class UserAccount {
 			e.printStackTrace();
 		}
 		return chaine;
+	}
+
+	public void DatabaseConnexion(String login, String password, String type, JFrame frame) {
+		if (type == "login") {
+			try {
+				Connection connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/login", "root",
+						"");
+
+				PreparedStatement st = (PreparedStatement) connection
+						.prepareStatement("Select * from login where login=? and password=?");
+
+				st.setString(1, login);
+				st.setString(2, getPassword());
+
+				ResultSet rs = st.executeQuery();
+				if (rs.next()) {
+					setAccountType(rs.getString("type"));
+					frame.setVisible(false);
+					Connected.main(login);
+				} else {
+					JOptionPane.showMessageDialog(frame, "erreur, login ou mot de passe invalide");
+				}
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(frame, "erreur sql");
+			}
+		} else {
+			try {
+				Connection connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/login", "root",
+						"");
+
+				PreparedStatement st = (PreparedStatement) connection
+						.prepareStatement("Select * from login where login=?");
+
+				st.setString(1, login);
+
+				ResultSet rs = st.executeQuery();
+				if (rs.next()) {
+					setAccountType(rs.getString("type"));
+				}
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(frame, "erreur sql");
+			}
+		}
 	}
 
 }
@@ -190,57 +232,6 @@ class AdminAccount extends UserAccount {
 		dechiffre = decryptInByte(dechiffre, clef);
 
 		return new String(dechiffre); // retourne au format chaine normal
-	}
-
-	public void Database(String login, String password, String type, JFrame frame) {
-		if (type == "login") {
-			try {
-				Connection connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/login", "root",
-						"");
-
-				PreparedStatement st = (PreparedStatement) connection
-						.prepareStatement("Select * from login where login=? and password=?");
-
-				st.setString(1, login);
-				st.setString(2, getPassword());
-
-				ResultSet rs = st.executeQuery();
-				if (rs.next()) {
-					name = rs.getString("name");
-					surname = rs.getString("surname");
-					setAccountType(rs.getString("type"));
-					decryptKey();
-					salary = AdminAccount.decryptInString(rs.getString("salary"), getMasterKey());
-					frame.setVisible(false);
-					Connected.main(login);
-				} else {
-					JOptionPane.showMessageDialog(frame, "erreur, login ou mot de passe invalide");
-				}
-			} catch (Exception e) {
-				JOptionPane.showMessageDialog(frame, "erreur sql");
-			}
-		} else {
-			try {
-				Connection connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/login", "root",
-						"");
-
-				PreparedStatement st = (PreparedStatement) connection
-						.prepareStatement("Select * from login where login=?");
-
-				st.setString(1, login);
-
-				ResultSet rs = st.executeQuery();
-				if (rs.next()) {
-					name = rs.getString("name");
-					surname = rs.getString("surname");
-					setAccountType(rs.getString("type"));
-					decryptKey();
-					salary = AdminAccount.decryptInString(rs.getString("salary"), getMasterKey());
-				}
-			} catch (Exception e) {
-				JOptionPane.showMessageDialog(frame, "erreur sql");
-			}
-		}
 	}
 
 	public void addUser(String accountLogin, JFrame frame) throws Exception {

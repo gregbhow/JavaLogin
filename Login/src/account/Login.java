@@ -80,7 +80,7 @@ public class Login {
 					login.setPassword((String.copyValueOf(textPwd.getPassword())));
 					login.setPassword(login.hashPassword(login.getPassword()));
 					try {
-						login.Database(login.login, login.getPassword(), "login", Login.this.frame);
+						login.DatabaseConnexion(login.login, login.getPassword(), "login", Login.this.frame);
 					} catch (Exception sqlException) {
 						sqlException.printStackTrace();
 					}
@@ -100,7 +100,7 @@ public class Login {
 				login.setPassword((String.copyValueOf(textPwd.getPassword())));
 				login.setPassword(login.hashPassword(login.getPassword()));
 				try {
-					login.Database(login.login, login.getPassword(), "login", Login.this.frame);
+					login.DatabaseConnexion(login.login, login.getPassword(), "login", Login.this.frame);
 				} catch (Exception sqlException) {
 					sqlException.printStackTrace();
 				}
@@ -119,7 +119,7 @@ public class Login {
 					login.setPassword((String.copyValueOf(textPwd.getPassword())));
 					login.setPassword(login.hashPassword(login.getPassword()));
 					try {
-						login.Database(login.login, login.getPassword(), "login", Login.this.frame);
+						login.DatabaseConnexion(login.login, login.getPassword(), "login", Login.this.frame);
 					} catch (Exception sqlException) {
 						sqlException.printStackTrace();
 					}
