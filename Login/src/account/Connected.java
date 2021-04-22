@@ -169,7 +169,7 @@ public class Connected {
 			textType.addItem("admin");
 
 			/**
-			 * button add that will inserted the informations of the input to the variables
+			 * button that will insert the informations of the input to the variables
 			 * in AdminAccount Class to the adminAccount method addUser.
 			 * 
 			 * Use of a new AdminAccount constructor because the constuctor account is
