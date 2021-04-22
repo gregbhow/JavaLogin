@@ -26,7 +26,8 @@ public class Connected {
 	private JPasswordField textPwd;
 
 	/**
-	 * Launch the application.
+	 * Launch the application. * @param login login is the login of the authentified
+	 * User
 	 */
 	public static void main(String login) {
 		EventQueue.invokeLater(new Runnable() {
@@ -43,6 +44,8 @@ public class Connected {
 
 	/**
 	 * Create the application.
+	 * 
+	 * @param login login is the login of the authentified User
 	 */
 	public Connected(String login) {
 		initialize(login);
@@ -50,6 +53,8 @@ public class Connected {
 
 	/**
 	 * Initialize the contents of the frame.
+	 * 
+	 * @param login login is the login of the authentified User
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private void initialize(String login) {
@@ -69,6 +74,11 @@ public class Connected {
 		lblconnected.setHorizontalAlignment(SwingConstants.CENTER);
 		lblconnected.setBounds(184, 56, 261, 22);
 		frame.getContentPane().add(lblconnected);
+		/**
+		 * Constructor AdminAccount initialized that will help for the authenticated to
+		 * see all of his informations (name, surname and salary)
+		 * 
+		 */
 		AdminAccount account = new AdminAccount();
 		account.DatabaseConnexion(login, null, null, frame);
 		lblconnected.setText("Bonjour," + account.name + " " + account.surname);
@@ -79,7 +89,12 @@ public class Connected {
 		lblsalary.setBounds(184, 82, 261, 22);
 		frame.getContentPane().add(lblsalary);
 
-		if (account.getAccountType().contains("1")) {
+		/**
+		 * if the user account type is admin then he can see the input to add a new user
+		 * 
+		 * @param accountType
+		 */
+		if (account.getAccountType().contains("admin")) {
 			JPanel panel = new JPanel();
 			panel.setBorder(new LineBorder(new Color(0, 0, 0)));
 			panel.setBounds(29, 115, 573, 445);
@@ -153,6 +168,14 @@ public class Connected {
 			textType.addItem("user");
 			textType.addItem("admin");
 
+			/**
+			 * button add that will inserted the informations of the input to the variables
+			 * in AdminAccount Class to the adminAccount method addUser.
+			 * 
+			 * Use of a new AdminAccount constructor because the constuctor account is
+			 * already used.
+			 * 
+			 */
 			JButton btnAdd = new JButton("Add");
 			btnAdd.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -162,11 +185,7 @@ public class Connected {
 					add.login = textLogin.getText();
 					add.setPassword(String.valueOf(textPwd.getPassword()));
 					add.salary = textSalary.getText();
-					if (textType.getSelectedItem().toString() == "user") {
-						add.setAccountType("0");
-					} else {
-						add.setAccountType("1");
-					}
+					add.setAccountType(textType.getSelectedItem().toString());
 					try {
 						add.addUser(login, frame);
 					} catch (Exception e1) {
@@ -184,7 +203,7 @@ public class Connected {
 			});
 			btnLogout.setBounds(144, 409, 99, 26);
 			panel.add(btnLogout);
-		}else {
+		} else {
 			JButton btnLogOut = new JButton("log out");
 			btnLogOut.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
