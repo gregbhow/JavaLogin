@@ -14,6 +14,12 @@ import javax.swing.JPasswordField;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+/**
+ * class Login
+ * 
+ * @author gregb
+ *
+ */
 public class Login {
 
 	private JFrame frame;
@@ -45,6 +51,13 @@ public class Login {
 
 	/**
 	 * Initialize the contents of the frame.
+	 * 
+	 * key listener of enter key on the login/password input | button that will send
+	 * the users inputs into AdminAccount method database connection to connect to
+	 * user to the application login input inserted in AdminAccount class variable
+	 * login password input converted into SHA hash and inserted in AdminAccount
+	 * Class method setPassword()
+	 * 
 	 */
 	private void initialize() {
 		frame = new JFrame();
@@ -70,13 +83,6 @@ public class Login {
 		lblPwd.setBounds(46, 218, 75, 32);
 		frame.getContentPane().add(lblPwd);
 		textLogin = new JTextField();
-		/**
-		 * key listener of enter key on the username input that will send the users inputs into AdminAccount method database connection
-		 * to connect to user to the application
-		 * 
-		 * login input inserted in AdminAccount class variable login
-		 * password input converted into SHA hash and inserted in AdminAccount Class method setPassword()
-		 */
 		textLogin.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -97,13 +103,7 @@ public class Login {
 		textLogin.setBounds(168, 132, 442, 32);
 		frame.getContentPane().add(textLogin);
 		textLogin.setColumns(10);
-		/**
-		 * button that will send the users inputs into AdminAccount method database connection
-		 * to connect to user to the application
-		 * 
-		 * login input inserted in AdminAccount class variable login
-		 * password input converted into SHA hash and inserted in AdminAccount Class method setPassword()
-		 */
+
 		JButton btnConnexion = new JButton("connexion");
 		btnConnexion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -121,13 +121,7 @@ public class Login {
 		btnConnexion.setBounds(272, 319, 119, 21);
 		frame.getContentPane().add(btnConnexion);
 		textPwd = new JPasswordField();
-		/**
-		 * key listener of enter key on the password input that will send the users inputs into AdminAccount method database connection
-		 * to connect to user to the application
-		 * 
-		 * login input inserted in AdminAccount class variable login
-		 * password input converted into SHA hash and inserted in AdminAccount Class method setPassword()
-		 */
+
 		textPwd.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {

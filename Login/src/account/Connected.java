@@ -16,6 +16,11 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/**
+ * class Connected
+ * @author gregb
+ *
+ */
 public class Connected {
 
 	private JFrame frame;
@@ -54,6 +59,19 @@ public class Connected {
 	/**
 	 * Initialize the contents of the frame.
 	 * 
+	 * Constructor AdminAccount initialized that will help for the authenticated to
+	 * see all of his informations (name, surname and salary)
+	 * 
+	 * If the user account type is 'admin' then he can see the input to add a new user
+	 * 
+	 * button add that will insert the informations of the input to the variables in
+	 * AdminAccount Class to the adminAccount method addUser.
+	 * 
+	 * Use of a new AdminAccount constructor because the constuctor account is
+	 * already used.
+	 * 
+	 * button logout to quit the program and log out
+	 * 
 	 * @param login login is the login of the authentified User
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -75,8 +93,7 @@ public class Connected {
 		lblconnected.setBounds(184, 56, 261, 22);
 		frame.getContentPane().add(lblconnected);
 		/**
-		 * Constructor AdminAccount initialized that will help for the authenticated to
-		 * see all of his informations (name, surname and salary)
+		
 		 * 
 		 */
 		AdminAccount account = new AdminAccount();
@@ -89,11 +106,6 @@ public class Connected {
 		lblsalary.setBounds(184, 82, 261, 22);
 		frame.getContentPane().add(lblsalary);
 
-		/**
-		 * if the user account type is admin then he can see the input to add a new user
-		 * 
-		 * @param accountType
-		 */
 		if (account.getAccountType().contains("admin")) {
 			JPanel panel = new JPanel();
 			panel.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -168,14 +180,6 @@ public class Connected {
 			textType.addItem("user");
 			textType.addItem("admin");
 
-			/**
-			 * button that will insert the informations of the input to the variables
-			 * in AdminAccount Class to the adminAccount method addUser.
-			 * 
-			 * Use of a new AdminAccount constructor because the constuctor account is
-			 * already used.
-			 * 
-			 */
 			JButton btnAdd = new JButton("Add");
 			btnAdd.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
